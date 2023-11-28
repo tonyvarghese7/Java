@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+public class BinarySearch {
+
+    // Function to perform binary search
+    static int binarySearch(int[] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            // Check if the target is present at mid
+            if (arr[mid] == target) {
+                return mid;
+            }
+
+            // If target is greater, ignore the left half
+            else if (arr[mid] < target) {
+                low = mid + 1;
+            }
+
+            // If target is smaller, ignore the right half
+            else {
+                high = mid - 1;
+            }
+        }
+
+        // If we reach here, the element was not present
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the size of the array
+        System.out.print("Enter the size of the array: ");
+        int size = scanner.nextInt();
+
+        // Create an array of the given size
+        int[] arr = new int[size];
+
+        // Get the array elements from the user
+        System.out.println("Enter the elements of the array (in sorted order):");
+        for (int i = 0; i < size; i++) {
+            System.out.print("Enter element " + (i + 1) + ": ");
+            arr[i] = scanner.nextInt();
+        }
+
+        // Get the target element to search
+        System.out.print("Enter the target element to search: ");
+        int target = scanner.nextInt();
+
+        // Perform binary search
+        int result = binarySearch(arr, target);
+
+        // Display the result
+        if (result != -1) {
+            System.out.println("Element found at index " + result);
+        } else {
+            System.out.println("Element not found in the array");
+        }
+
+        scanner.close();
+    }
+}
